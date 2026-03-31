@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="BudgetWise - Smart Expense Tracker and Budget Planner">
+  <meta name="theme-color" content="#6366f1">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="BudgetWise">
+<title>Budget Management</title>
+    <link rel="shortcut icon" href="favicon.ico?v=2" type="image/x-icon">  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <!-- Floating Feature Cards -->
+  <div class="auth-container">
+    <div class="feature-float top-left">
+      <span class="feature-icon">💰</span>
+      <div class="feature-title">Track Expenses</div>
+      <div class="feature-desc">Log every rupee instantly</div>
+    </div>
+    <div class="feature-float top-right">
+      <span class="feature-icon">📊</span>
+      <div class="feature-title">Visual Reports</div>
+      <div class="feature-desc">Beautiful charts & insights</div>
+    </div>
+    <div class="feature-float bottom-left">
+      <span class="feature-icon">🎯</span>
+      <div class="feature-title">Budget Goals</div>
+      <div class="feature-desc">Set and smash savings targets</div>
+    </div>
+    <div class="feature-float bottom-right">
+      <span class="feature-icon">🔒</span>
+      <div class="feature-title">100% Private</div>
+      <div class="feature-desc">All data stays on your device</div>
+    </div>
+
+    <div class="auth-card card">
+      <div class="card-body">
+        <div class="auth-header">
+          <h1><i class="bi bi-wallet2"></i> BudgetWise</h1>
+          <p>Track expenses, plan budgets, save smarter.</p>
+        </div>
+
+        <div id="authAlert"></div>
+
+        <div class="auth-tabs">
+          <button class="auth-tab active" onclick="switchTab('login')" id="loginTab">Login</button>
+          <button class="auth-tab" onclick="switchTab('register')" id="registerTab">Register</button>
+        </div>
+
+        <!-- LOGIN FORM -->
+        <form id="loginForm" onsubmit="handleLogin(event)">
+          <div class="mb-3">
+            <label for="loginEmail" class="form-label">Email Address</label>
+            <input type="email" class="form-control" id="loginEmail" placeholder="Enter your email" required>
+          </div>
+          <div class="mb-3">
+            <label for="loginPassword" class="form-label">Password</label>
+            <div class="position-relative">
+              <input type="password" class="form-control" id="loginPassword" placeholder="Enter password" minlength="6" required>
+              <button type="button" class="password-toggle" onclick="togglePassword('loginPassword', this)">
+                <i class="bi bi-eye"></i>
+              </button>
+            </div>
+          </div>
+          <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="rememberMe">
+            <label class="form-check-label" for="rememberMe" style="color: var(--text-secondary);">Remember Me</label>
+          </div>
+          <button type="submit" class="btn btn-primary w-100 mb-3">
+            <i class="bi bi-box-arrow-in-right"></i> Login
+          </button>
+          <button type="button" class="btn btn-demo w-100" onclick="demoLogin()">
+            <i class="bi bi-lightning-fill"></i> Demo Login
+          </button>
+        </form>
+
+        <!-- REGISTER FORM -->
+        <form id="registerForm" style="display:none;" onsubmit="handleRegister(event)">
+          <div class="mb-3">
+            <label for="regName" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="regName" placeholder="Enter your full name" required>
+          </div>
+          <div class="mb-3">
+            <label for="regEmail" class="form-label">Email Address</label>
+            <input type="email" class="form-control" id="regEmail" placeholder="Enter your email" required>
+          </div>
+          <div class="mb-3">
+            <label for="regPassword" class="form-label">Password</label>
+            <div class="position-relative">
+              <input type="password" class="form-control" id="regPassword" placeholder="Min 6 characters" minlength="6" required>
+              <button type="button" class="password-toggle" onclick="togglePassword('regPassword', this)">
+                <i class="bi bi-eye"></i>
+              </button>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="regConfirmPassword" class="form-label">Confirm Password</label>
+            <div class="position-relative">
+              <input type="password" class="form-control" id="regConfirmPassword" placeholder="Confirm your password" required>
+              <button type="button" class="password-toggle" onclick="togglePassword('regConfirmPassword', this)">
+                <i class="bi bi-eye"></i>
+              </button>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="regCurrency" class="form-label">Preferred Currency</label>
+            <select class="form-select" id="regCurrency">
+              <option value="INR">₹ INR - Indian Rupee</option>
+              <option value="USD">$ USD - US Dollar</option>
+              <option value="EUR">€ EUR - Euro</option>
+              <option value="GBP">£ GBP - British Pound</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">
+            <i class="bi bi-person-plus"></i> Create Account
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Highlight stats below card -->
+    <div class="auth-highlights">
+      <span>✅ Free Forever</span>
+      <span>🔒 No Cloud</span>
+      <span>⚡ Instant Setup</span>
+    </div>
+  </div>
+  <!-- <script>
+    document.getElementsByClassName("auth-highlights")[0].remove();
+  </script> -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="js/storage.js"></script>
+
+  <script>
+    $(document).ready(function() {
+      applySavedTheme();
+      var user = getCurrentUser();
+      if (user) {
+        window.location.href = 'dashboard.html';
+      }
+    });
+
+    function switchTab(tab) {
+      $('#authAlert').html('');
+      if (tab === 'login') {
+        $('#loginForm').show();
+        $('#registerForm').hide();
+        $('#loginTab').addClass('active');
+        $('#registerTab').removeClass('active');
+      } else {
+        $('#loginForm').hide();
+        $('#registerForm').show();
+        $('#registerTab').addClass('active');
+        $('#loginTab').removeClass('active');
+      }
+    }
+
+    function togglePassword(inputId, btn) {
+      var input = document.getElementById(inputId);
+      var icon = btn.querySelector('i');
+      if (input.type === 'password') {
+        input.type = 'text';
+        icon.className = 'bi bi-eye-slash';
+      } else {
+        input.type = 'password';
+        icon.className = 'bi bi-eye';
+      }
+    }
+
+    function showAuthAlert(message, type) {
+      $('#authAlert').html(
+        '<div class="alert alert-' + type + ' custom-alert alert-dismissible fade show">' +
+        message +
+        '<button type="button" class="btn-close" data-bs-dismiss="alert"></button>' +
+        '</div>'
+      );
+    }
+
+    function isValidEmail(email) {
+      var regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      return regex.test(email);
+    }
+
+    function handleLogin(event) {
+      event.preventDefault();
+      var email = $('#loginEmail').val().trim();
+      var password = $('#loginPassword').val();
+      if (!email || !password) { showAuthAlert('Please fill in all fields.', 'danger'); return; }
+      if (!isValidEmail(email)) { showAuthAlert('Please enter a valid email address.', 'danger'); return; }
+      var user = getUserByEmail(email);
+      if (user && user.password === password) {
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        showAuthAlert('Login successful! Redirecting...', 'success');
+        setTimeout(function() { window.location.href = 'dashboard.html'; }, 500);
+      } else {
+        showAuthAlert('Invalid email or password. Please register first or use Demo Login.', 'danger');
+      }
+    }
+
+    function handleRegister(event) {
+      event.preventDefault();
+      var name = $('#regName').val().trim();
+      var email = $('#regEmail').val().trim();
+      var password = $('#regPassword').val();
+      var confirmPassword = $('#regConfirmPassword').val();
+      var currency = $('#regCurrency').val();
+      if (!name || !email || !password || !confirmPassword) { showAuthAlert('Please fill in all fields.', 'danger'); return; }
+      if (!isValidEmail(email)) { showAuthAlert('Please enter a valid email address.', 'danger'); return; }
+      if (password.length < 6) { showAuthAlert('Password must be at least 6 characters.', 'danger'); return; }
+      if (password !== confirmPassword) { showAuthAlert('Passwords do not match!', 'danger'); return; }
+      if (getUserByEmail(email)) { showAuthAlert('An account with this email already exists. Please login.', 'warning'); switchTab('login'); return; }
+      registerUser(name, email, password, currency);
+      showAuthAlert('Account created successfully! Redirecting...', 'success');
+      setTimeout(function() { window.location.href = 'dashboard.html'; }, 500);
+    }
+
+    function demoLogin() {
+      registerUser('Demo User', 'demo@budgetwise.com', 'demo123', 'INR');
+      loadSampleData();
+      showAuthAlert('Demo account ready! Redirecting...', 'success');
+      setTimeout(function() { window.location.href = 'dashboard.html'; }, 500);
+    }
+  </script>
+</body>
+</html>
