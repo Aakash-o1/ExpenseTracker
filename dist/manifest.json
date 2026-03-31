@@ -1,0 +1,18 @@
+{
+  "name": "Budget Tracker",
+  "short_name": "BudgetTracker",
+  "description": "Track expenses, plan budgets, save smarter",
+  "start_url": "/login.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0f172a",
+  "theme_color": "#6366f1",
+  "categories": ["finance", "productivity"],
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64",
+      "type": "image/x-icon"
+    }
+  ]
+}

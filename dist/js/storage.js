@@ -579,9 +579,9 @@ function updateThemeIcon() {
   var btn = document.getElementById('themeToggle');
   if (btn) {
     if (document.body.classList.contains('dark-mode')) {
-      btn.innerHTML = '<i class="bi bi-sun-fill"></i>';
-    } else {
       btn.innerHTML = '<i class="bi bi-moon-fill"></i>';
+    } else {
+      btn.innerHTML = '<i class="bi bi-sun-fill"></i>';
     }
   }
 }
@@ -593,7 +593,7 @@ function updateThemeIcon() {
  */
 function applySavedTheme() {
   var theme = localStorage.getItem('theme');
-  if (theme !== 'light') {
+  if (theme === 'dark') {
     document.body.classList.add('dark-mode');
     localStorage.setItem('theme', 'dark');
   }
